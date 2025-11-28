@@ -1,1 +1,6 @@
-# Practica_2_VV
+# Practica\_2\_VV
+
+
+
+pinte es el mallor vujarra que esiste
+
