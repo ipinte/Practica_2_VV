@@ -1,0 +1,10 @@
+space_invaders/sprites/Alien.class
+space_invaders/sprites/Shot.class
+main/Board.class
+main/Main.class
+space_invaders/sprites/Sprite.class
+main/Board$GameCycle.class
+space_invaders/sprites/Player.class
+space_invaders/sprites/Alien$Bomb.class
+main/Board$TAdapter.class
+main/Commons.class
