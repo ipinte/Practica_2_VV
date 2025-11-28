@@ -39,7 +39,7 @@ public class Player extends Sprite {
 
         int START_X = 179;
         setX(START_X);
-
+        //probando probando
         int START_Y = 280;
         setY(START_Y);
     }
