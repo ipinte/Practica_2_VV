@@ -16,6 +16,7 @@ public class Shot extends Sprite {
      * Se debe utilizar {@link #initShot(int, int)} para establecer su posición.
      */
     public Shot() {
+        this.setVisible(false);
     }
 
     /**
