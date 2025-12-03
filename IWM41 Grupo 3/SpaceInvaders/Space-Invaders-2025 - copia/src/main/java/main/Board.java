@@ -508,7 +508,7 @@ public class Board extends JPanel {
 
             if (!bomb.isDestroyed()) {
 
-                bomb.setY(bomb.getY() - Commons.BOMB_SPEED);
+                bomb.setY(bomb.getY() + Commons.BOMB_SPEED);
 
                 if (bomb.getY() >= Commons.GROUND - Commons.BOMB_HEIGHT) {
 
