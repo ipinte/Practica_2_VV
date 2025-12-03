@@ -296,21 +296,29 @@ public class Board extends JPanel {
      * ({@link main.Commons#NUMBER_OF_ALIENS_TO_DESTROY}), el juego se marca como finalizado, 
      * y se establece el mensaje "<code>Game won!</code>".</dd></dl>
      */
-    public void update() {
+public void update() {
 
-        if (deaths == Commons.NUMBER_OF_ALIENS_TO_DESTROY) {
+    if (this.deaths == Commons.NUMBER_OF_ALIENS_TO_DESTROY) {
+        this.inGame = false;
+        this.timer.stop();
+        this.message = "Game won!";
+    }
 
-            inGame = false;
-            timer.stop();
-            message = "Game won!";
+    //se ha añadido este bloque de código para que el timer se inicie de nuevo si se ha pausado
+    if (this.inGame) {
+        if (this.timer != null && !this.timer.isRunning()) {
+            this.timer.start();
         }
 
-        // player
-        this.player.act();
+        if (this.player != null) {
+            this.player.act();
+        }
+
         update_shots();
         update_aliens();
         update_bomb();
     }
+}
 
     /**
      * {@summary Gestiona el movimiento y las colisiones de los disparos del jugador.}
