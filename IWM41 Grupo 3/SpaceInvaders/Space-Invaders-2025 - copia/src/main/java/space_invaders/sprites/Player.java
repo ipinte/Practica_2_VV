@@ -38,7 +38,7 @@ public class Player extends Sprite {
         width = ii.getImage().getWidth(null);
         setImage(ii.getImage());
 
-        int START_X = 179;
+        int START_X = 171; /* SE CAMBIA, EN LUGAR DE 179 ES 171 */
         setX(START_X);
         //probando probando
         int START_Y = 280;
@@ -63,12 +63,12 @@ public class Player extends Sprite {
 
         if (x <= 2) {
 
-            x = 2;
+            x = 2; //Limite de la izda, por si se pasa
         }
 
-        if (x >= Commons.BOARD_WIDTH - 2 * width) {
+        if (x >= Commons.BOARD_WIDTH - 2 * width) {//Habia un -, sigue igual porque comprueba que si llega al lim dcho hace lo de abajo
 
-            x = Commons.BOARD_WIDTH + 2 * width;
+            x = Commons.BOARD_WIDTH - 2 * width; //Habia un +, es decir se pasaba del limite derecho cuando en realidad quiero que se quede en el limite, es decir la condicion de arriba
         }
     }
 

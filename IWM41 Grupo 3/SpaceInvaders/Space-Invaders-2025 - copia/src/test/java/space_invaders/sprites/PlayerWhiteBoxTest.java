@@ -34,7 +34,7 @@ class PlayerWhiteBoxTest {
     void initPlayer_probarInicializacion() {
         Player player = new Player();
 
-        boolean resultado = (player.getX() == 179) && (player.getY() == 280) && (player.getImage() != null);
+        boolean resultado = (player.getX() == 171) && (player.getY() == 280) && (player.getImage() != null);
         assertTrue(resultado);
     }
 
@@ -69,7 +69,7 @@ class PlayerWhiteBoxTest {
         player.setX(limiteDerecho - 1);
         player.keyPressed(pressRight);
         player.act();
-        assertEquals(Commons.BOARD_WIDTH + 2 * PlayerWidth, player.getX(), "La posición X del jugador no se ha corregido correctamente al salir por el límite derecho");
+        assertEquals(Commons.BOARD_WIDTH - 2 * PlayerWidth, player.getX(), "La posición X del jugador no se ha corregido correctamente al salir por el límite derecho"); //Habia un +
     }
 
     //--- Pruebas para keyPressed() [CC = 2] ---

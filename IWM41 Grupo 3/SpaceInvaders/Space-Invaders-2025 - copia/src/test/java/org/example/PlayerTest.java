@@ -37,7 +37,7 @@ class PlayerTest {
     @Test
     void inicializarPlayerX() {
         int Xesperada= (Commons.BOARD_WIDTH - Commons.PLAYER_WIDTH) / 2;
-        assertEquals(Xesperada, player.getX(), "El jugador no está centrado " );
+        assertEquals(Xesperada, player.getX(), "El jugador no está centrado " );  //ARREGLADO, HABIA Q PONER 171 EN LUGAR DE 179
     }
 
     @Test
