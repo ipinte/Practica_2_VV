@@ -491,7 +491,7 @@ public void update() {
 
         for (Alien alien : this.aliens) {
 
-            int rand = generator.nextInt(100);
+            int rand = generator.nextInt(15);
             Alien.Bomb bomb = alien.getBomb();
 
             if (rand == Commons.CHANCE && alien.isVisible() && bomb.isDestroyed()) {
