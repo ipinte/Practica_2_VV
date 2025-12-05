@@ -63,8 +63,8 @@ class AlienWhiteBoxTest {
     void act_UnicoCamino() {
         alien = new Alien(100, 100);
         int xInicial = alien.getX();
-        alien.act(10);
-        boolean ok = alien.getX() == (xInicial - 10);
+        alien.act(1);
+        boolean ok = alien.getX() == (xInicial + 1);
         assertTrue(ok);
     }
 

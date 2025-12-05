@@ -83,11 +83,8 @@ public class Alien extends Sprite {
      * según la dirección especificada.</dd></dl>
      */
     public void act(int direction) {
-        //Cambiado para comprobar la posición del alien antes de moverse
-        int new_pos = this.x + direction;
-        if(0 <= new_pos && new_pos < Commons.BOARD_WIDTH - Commons.ALIEN_WIDTH) {
-            this.x += direction;
-        }
+        //Cambiado el sentido de la dirección
+        this.x += direction;
     }
 
     /**
