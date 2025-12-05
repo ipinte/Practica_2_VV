@@ -32,15 +32,19 @@ public class Player extends Sprite {
      */
     private void initPlayer() {
 
-        var playerImg = "src/main/resources/images/player.png";
-        var ii = new ImageIcon(playerImg);
+        var playerImg = "/images/player.png";
+        var imgUrl = getClass().getResource(playerImg);
 
-        width = ii.getImage().getWidth(null);
-        setImage(ii.getImage());
+        if (imgUrl != null) {
+            var ii = new ImageIcon(imgUrl);
+            width = ii.getImage().getWidth(null);
+            setImage(ii.getImage());
+        } else {
+            System.err.println("Error cargando imagen: " + playerImg);
+        }
 
-        int START_X = 171; /* SE CAMBIA, EN LUGAR DE 179 ES 171 */
+        int START_X = 171;
         setX(START_X);
-        //probando probando
         int START_Y = 280;
         setY(START_Y);
     }

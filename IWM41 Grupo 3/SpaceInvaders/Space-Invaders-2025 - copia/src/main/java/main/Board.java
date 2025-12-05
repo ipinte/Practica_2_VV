@@ -48,7 +48,7 @@ public class Board extends JPanel {
     private int deaths = 0;
 
     private boolean inGame = true;
-    private String explImg = "src/main/resources/images/explosion.png";
+    private String explImg = "/images/explosion.png";
     private String message = "Game Over";
 
     private Timer timer;
@@ -351,17 +351,22 @@ public void update() {
                 int alienX = alien.getX();
                 int alienY = alien.getY();
 
-                if (alien.isVisible() && this.shot.isVisible()) {
+                if (alien.isVisible() && !alien.isDying() && this.shot.isVisible()) {
                     if (shotX >= (alienX)
                             && shotX <= (alienX + Commons.ALIEN_WIDTH)
                             && shotY >= (alienY)
                             && shotY <= (alienY + Commons.ALIEN_HEIGHT)) {
 
-                        var ii = new ImageIcon(explImg);
-                        alien.setImage(ii.getImage());
+                        var explImgPath = "/images/explosion.png";
+                        var imgUrl = getClass().getResource(explImgPath);
+
+                        if (imgUrl != null) {
+                            var ii = new ImageIcon(imgUrl);
+                            alien.setImage(ii.getImage());
+                        }
                         alien.setDying(true);
                         deaths++;
-                        
+                        this.shot.die();
                     }
                 }
             }
@@ -486,10 +491,10 @@ public void update() {
 
         for (Alien alien : this.aliens) {
 
-            int rand = generator.nextInt(15);
+            int rand = generator.nextInt(100);
             Alien.Bomb bomb = alien.getBomb();
 
-            if (rand != Commons.CHANCE && alien.isVisible() && bomb.isDestroyed()) {
+            if (rand == Commons.CHANCE && alien.isVisible() && bomb.isDestroyed()) {
 
                 bomb.setDestroyed(false);
                 bomb.setX(alien.getX());
@@ -578,7 +583,7 @@ public void update() {
 
                     if (!shot.isVisible()) {
 
-                        shot = new Shot(y, x);
+                        shot = new Shot(x, y);
                     }
                 }
             }

@@ -65,9 +65,15 @@ public class Alien extends Sprite {
 
         bomb = new Bomb(this.x, this.y);
 
-        var alienImg = "src/main/resources/images/alien.png";
-        var ii = new ImageIcon(alienImg);
-        setImage(ii.getImage());
+        var alienImg = "/images/alien.png";
+        var imgUrl = getClass().getResource(alienImg);
+
+        if (imgUrl == null) {
+            System.err.println("No se encontró la imagen: " + alienImg);
+        } else {
+            var ii = new ImageIcon(imgUrl);
+            setImage(ii.getImage());
+        }
     }
 
     /**
@@ -141,9 +147,14 @@ public class Alien extends Sprite {
                 this.y = Commons.BOARD_HEIGHT;
             }
 
-            var bombImg = "src/main/resources/images/bomb.png";
-            var ii = new ImageIcon(bombImg);
-            setImage(ii.getImage());
+            var explImgPath = "/images/explosion.png";
+            var imgUrl = getClass().getResource(explImgPath);
+
+            if (imgUrl != null) {
+                var ii = new ImageIcon(imgUrl);
+                setImage(ii.getImage());
+            }
+            setImage(getImage());
         }
 
         /**
