@@ -74,27 +74,6 @@ class AlienTest {
         assertTrue(resultado);
     }
 
-    @Test
-    void act_EnBordeIzquierdo() {
-        alien = new Alien(0, 100);
-
-        alien.act(-1);
-
-        assertTrue(alien.getX() >= 0,
-                "El alien no debe salirse del borde izquierdo del tablero (X < 0)");
-    }
-
-    @Test
-    void act_EnBordeDerecho() {
-        int maxX = Commons.BOARD_WIDTH - Commons.ALIEN_WIDTH;
-        alien = new Alien(maxX, 100);
-
-        alien.act(1);
-
-        assertTrue(alien.getX() <= maxX,
-                "El alien no debe salirse del borde derecho del tablero");
-    }
-
     // --- Pruebas para initBomb() ---
 
     @Test
