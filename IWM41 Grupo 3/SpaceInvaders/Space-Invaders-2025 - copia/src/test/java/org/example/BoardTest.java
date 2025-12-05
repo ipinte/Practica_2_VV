@@ -103,7 +103,7 @@ class BoardTest {
 
     @Test
     void testAliensAtRightBorder() throws Exception {
-        board.setDirection(1);
+        setDirection(1);
         Alien alien = aliens.getFirst();
         alien.setX(Commons.BOARD_WIDTH - Commons.BORDER_RIGHT);
         int initialY = alien.getY();

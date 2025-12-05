@@ -44,7 +44,7 @@ public class Board extends JPanel {
     private Player player;
     private Shot shot;
 
-    private int direction = -1;
+    private int direction = 1; // Anteriormente era -1 ahora inicia moviéndose a la derecha
     private int deaths = 0;
 
     private boolean inGame = true;
@@ -373,7 +373,7 @@ public void update() {
                 this.shot.die();
             } else {
                 this.shot.setY(y);
-                this.shot.setX(y);
+
             }
         }
     }
@@ -406,7 +406,7 @@ public void update() {
 
             int x = alien.getX();
 
-            if (x >= Commons.BOARD_WIDTH - Commons.BORDER_RIGHT && direction == -1) {
+            if (x >= Commons.BOARD_WIDTH - Commons.BORDER_RIGHT && direction == 1) {
 
                 direction = -1;
 
@@ -419,7 +419,7 @@ public void update() {
                 }
             }
 
-            if (x <= Commons.BORDER_LEFT && direction != 1) {
+            else if (x <= Commons.BORDER_LEFT && direction != 1) {
 
                 direction = 1;
 
@@ -431,6 +431,7 @@ public void update() {
                     a.setY(a.getY() + Commons.GO_DOWN);
                 }
             }
+
         }
 
         Iterator<Alien> it = this.aliens.iterator();
@@ -444,7 +445,7 @@ public void update() {
                 int y = alien.getY();
 
                 if (y > Commons.GROUND + Commons.ALIEN_HEIGHT) {
-                    inGame = true;
+                    inGame = false;
                     message = "Invasion!";
                 }
 

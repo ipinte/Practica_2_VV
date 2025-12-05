@@ -133,7 +133,7 @@ class BoardWhiteBoxTest {
         board.update_aliens();
 
 
-        boolean conditionsMet = (a.getX() == 149) // 150 - 1
+        boolean conditionsMet = (a.getX() == 151) // 150 - 1
                 && (a.getY() == 100)
                 && (board.getDirection() == 1);
         assertTrue(conditionsMet, "El alien no se movió correctamente o la dirección cambió indebidamente");
@@ -142,12 +142,12 @@ class BoardWhiteBoxTest {
     @Test
     void testAliensHitRightBoundary() {
         Alien a = addAlien(Commons.BOARD_WIDTH - Commons.BORDER_RIGHT, 100, true);
-        board.setDirection(-1);
+        board.setDirection(1);
 
         board.update_aliens();
 
 
-        boolean directionCorrect = (board.getDirection() == 1);
+        boolean directionCorrect = (board.getDirection() == -1);
         boolean alienMovedDown = (a.getY() == 100 + Commons.GO_DOWN);
 
         assertTrue(directionCorrect && alienMovedDown, "La dirección no cambió a 1 o el alien no bajó");
@@ -174,7 +174,7 @@ class BoardWhiteBoxTest {
         board.update_aliens();
 
 
-        boolean conditionsMet = (board.getDirection() == 1) && (a.getY() == 100);
+        boolean conditionsMet = (board.getDirection() == -1) && (a.getY() == 115);
         assertTrue(conditionsMet, "La dirección cambió o el alien bajó incorrectamente");
     }
 
