@@ -7,11 +7,7 @@ import space_invaders.sprites.Shot;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.Timer;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.Toolkit;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
@@ -222,6 +218,11 @@ public class Board extends JPanel {
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
 
+        //Se han añadido las siguientes líneas para escalar el contenido al redimensionar la ventana
+        double escalaX = (double) getWidth() / Commons.BOARD_WIDTH;
+        double escalaY = (double) getHeight() / Commons.BOARD_HEIGHT;
+
+        ((Graphics2D) g).scale(escalaX, escalaY);
         doDrawing(g);
     }
 
