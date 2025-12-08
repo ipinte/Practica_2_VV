@@ -342,7 +342,7 @@ public void update() {
      * Los disparos que salen del tablero por arriba se eliminan.</dd></dl>
      */
     public void update_shots() {
-        if (this.shot.isVisible()) {
+        if (this.shot != null && this.shot.isVisible()) {
 
             int shotX = this.shot.getX();
             int shotY = this.shot.getY();
