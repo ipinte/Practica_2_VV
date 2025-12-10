@@ -527,6 +527,7 @@ public void update() {
 
             if (!bomb.isDestroyed()) {
 
+                // Para solucionar el error de este metodo hemos cambiado el "-" por un "+".
                 bomb.setY(bomb.getY() + Commons.BOMB_SPEED);
 
                 if (bomb.getY() >= Commons.GROUND - Commons.BOMB_HEIGHT) {
