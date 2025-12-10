@@ -342,6 +342,7 @@ public void update() {
      * Los disparos que salen del tablero por arriba se eliminan.</dd></dl>
      */
     public void update_shots() {
+        // Evita NullPointerException si update_shots se llama antes de disparar
         if (this.shot != null && this.shot.isVisible()) {
 
             int shotX = this.shot.getX();
@@ -351,7 +352,7 @@ public void update() {
 
                 int alienX = alien.getX();
                 int alienY = alien.getY();
-
+                // Evita disparar a un alien que ya está explotando
                 if (alien.isVisible() && !alien.isDying() && this.shot.isVisible()) {
                     if (shotX >= (alienX)
                             && shotX <= (alienX + Commons.ALIEN_WIDTH)
@@ -367,6 +368,7 @@ public void update() {
                         }
                         alien.setDying(true);
                         deaths++;
+                        // El disparo debe destruirse al impactar
                         this.shot.die();
                     }
                 }
@@ -379,6 +381,7 @@ public void update() {
                 this.shot.die();
             } else {
                 this.shot.setY(y);
+                // Se ha eliminado la línea: 'this.shot.setX(y);'
 
             }
         }
@@ -412,9 +415,10 @@ public void update() {
 
             int x = alien.getX();
 
-            if (x >= Commons.BOARD_WIDTH - Commons.BORDER_RIGHT && direction == 1) {
+            if (x >= Commons.BOARD_WIDTH - Commons.BORDER_RIGHT && direction == 1) {// Verifica si va a la Derecha (1)
 
-                direction = -1;
+                direction = -1;// Cambia a Izquierda (-1)
+
 
                 Iterator<Alien> i1 = this.aliens.iterator();
 
@@ -451,7 +455,7 @@ public void update() {
                 int y = alien.getY();
 
                 if (y > Commons.GROUND + Commons.ALIEN_HEIGHT) {
-                    inGame = false;
+                    inGame = false;// Termina el juego
                     message = "Invasion!";
                 }
 
