@@ -16,6 +16,9 @@ public class Shot extends Sprite {
      * Se debe utilizar {@link #initShot(int, int)} para establecer su posición.
      */
     public Shot() {
+        /** Se ha añadido esta línea para solucionar el error del metodo gameInit()
+         * El objeto Shot debe inicializarse para que no sea visible.
+         */
         this.setVisible(false);
     }
 

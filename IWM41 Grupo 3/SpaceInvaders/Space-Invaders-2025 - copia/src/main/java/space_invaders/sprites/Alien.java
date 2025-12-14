@@ -45,7 +45,7 @@ public class Alien extends Sprite {
      */
     private void initAlien(int x, int y) {
 
-        // Normalización de X
+        // Normalización de X separada
         if (x > Commons.BOARD_WIDTH) {
             this.x = Commons.BOARD_WIDTH;
         } else if (x < 0) {
@@ -54,7 +54,7 @@ public class Alien extends Sprite {
             this.x = x;
         }
 
-        // Normalización de Y
+        // Normalización de Y separada
         if (y > Commons.BOARD_HEIGHT) {
             this.y = Commons.BOARD_HEIGHT;
         } else if (y < 0) {
