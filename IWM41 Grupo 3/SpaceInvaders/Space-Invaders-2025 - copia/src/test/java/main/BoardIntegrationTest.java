@@ -10,6 +10,8 @@ import space_invaders.sprites.Alien;
 import space_invaders.sprites.Player;
 import space_invaders.sprites.Shot;
 
+import main.Commons; //Nuevo
+
 import javax.swing.Timer;
 
 import java.util.ArrayList;
@@ -182,4 +184,35 @@ public class BoardIntegrationTest {
         verify(timerMock).start();
         verify(playerMock).act();
     }
+
+
+    @Test
+    public void testGameInit() {
+        logger.info("TEST: gameInit() - Verificación de inicialización real de objetos (Top-Down con objetos reales)");
+
+        // 1. Ejecutar el método a probar.
+        // NOTA: gameInit() hace internamente 'new Player()', 'new Alien()', etc.
+        // Esto sobrescribe los Mocks inyectados en setUp() con objetos reales.
+        board.gameInit();
+
+        // 2. Verificaciones de Estado (State Verification)
+
+        // Verificar que la lista de Aliens se ha creado y llenado correctamente
+        assertNotNull(board.getAliens(), "La lista de aliens no debe ser null");
+        assertEquals(Commons.NUMBER_OF_ALIENS_TO_DESTROY, board.getAliens().size(),
+                "El número de aliens creados debe ser " + Commons.NUMBER_OF_ALIENS_TO_DESTROY);
+
+        // Verificar que el Player se ha reiniciado (es un objeto nuevo y real, no null)
+        assertNotNull(board.getPlayer(), "El objeto Player debe haber sido creado");
+
+        // Verificar que el Shot se ha reiniciado
+        assertNotNull(board.getShot(), "El objeto Shot debe haber sido creado");
+
+        // Verificar que el juego no se considera 'ganado' ni 'perdido' al inicio
+        assertTrue(board.isInGame(), "El juego debe estar en estado 'inGame = true'");
+
+        logger.info("OK: gameInit inicializó correctamente la estructura de objetos.");
+    }
+
+
 }
