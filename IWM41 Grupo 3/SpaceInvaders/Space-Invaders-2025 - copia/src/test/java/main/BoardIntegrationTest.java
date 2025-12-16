@@ -14,6 +14,7 @@ import main.Commons; //Nuevo
 
 import javax.swing.Timer;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
@@ -214,5 +215,67 @@ public class BoardIntegrationTest {
         logger.info("OK: gameInit inicializó correctamente la estructura de objetos.");
     }
 
+    @Test
+    public void testUpdateBomb_MovimientoNormal() {
+        logger.info("TEST: update_bomb() - Verificar movimiento vertical de bomba activa");
+        when(bombMock.isDestroyed()).thenReturn(false);
+        when(bombMock.getX()).thenReturn(100);
+        when(bombMock.getY()).thenReturn(100);
+        when(playerMock.isVisible()).thenReturn(true);
+        when(playerMock.getX()).thenReturn(300);
+        when(playerMock.getY()).thenReturn(300);
+
+        board.update_bomb();
+
+        verify(bombMock, atLeastOnce()).setY(100 + Commons.BOMB_SPEED);
+
+        verify(bombMock, never()).setDestroyed(true);
+
+        logger.info("OK: La bomba activa se movió hacia abajo correctamente.");
+    }
+
+    @Test
+    public void testUpdateBomb_ColisionConJugador() {
+        logger.info("TEST: update_bomb() - Verificar colisión Bomba -> Jugador");
+        when(bombMock.isDestroyed()).thenReturn(false);
+
+        int collisionX = 150;
+        int collisionY = 280;
+
+        when(bombMock.getX()).thenReturn(collisionX);
+        when(bombMock.getY()).thenReturn(collisionY);
+
+        when(playerMock.isVisible()).thenReturn(true);
+        when(playerMock.getX()).thenReturn(collisionX);
+        when(playerMock.getY()).thenReturn(collisionY);
+        board.update_bomb();
+
+        verify(playerMock, atLeastOnce()).setDying(true);
+        verify(playerMock, atLeastOnce()).setImage(any(Image.class));
+        verify(bombMock, atLeastOnce()).setDestroyed(true);
+
+        logger.info("OK: La colisión destruyó la bomba y mató al jugador.");
+    }
+
+    @Test
+    public void testUpdateBomb_ImpactoSuelo() {
+        logger.info("TEST: update_bomb() - Verificar destrucción al tocar el suelo");
+
+        when(bombMock.isDestroyed()).thenReturn(false);
+        when(playerMock.isVisible()).thenReturn(true);
+        when(playerMock.getX()).thenReturn(300);
+        when(playerMock.getY()).thenReturn(300); // Lejos
+        int initialY = Commons.GROUND - Commons.BOMB_HEIGHT - Commons.BOMB_SPEED + 1;
+        when(bombMock.getX()).thenReturn(50);
+        when(bombMock.getY()).thenReturn(initialY);
+
+        when(bombMock.getY()).thenReturn(Commons.GROUND);
+
+        board.update_bomb();
+
+        verify(bombMock, atLeastOnce()).setDestroyed(true);
+
+        logger.info("OK: La bomba se destruyó al alcanzar el límite del suelo.");
+    }
 
 }
