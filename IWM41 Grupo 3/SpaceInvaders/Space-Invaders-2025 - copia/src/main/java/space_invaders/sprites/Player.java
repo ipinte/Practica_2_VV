@@ -43,7 +43,7 @@ public class Player extends Sprite {
             System.err.println("Error cargando imagen: " + playerImg);
         }
 
-        int START_X = 171;
+        int START_X = 171; //Se ha cambiado el 179 por 171
         setX(START_X);
         int START_Y = 280;
         setY(START_Y);
@@ -70,11 +70,11 @@ public class Player extends Sprite {
             x = 2; //Limite de la izda, por si se pasa
         }
 
-        if (x >= Commons.BOARD_WIDTH - 2 * width) {//Habia un -, sigue igual porque comprueba que si llega al lim dcho hace lo de abajo
+        if (x >= Commons.BOARD_WIDTH - 2 * width) {
 
-            x = Commons.BOARD_WIDTH - 2 * width; //Habia un +, es decir se pasaba del limite derecho cuando en realidad quiero que se quede en el limite, es decir la condicion de arriba
-        }
-    }
+            x = Commons.BOARD_WIDTH - 2 * width; //Cambio + por -
+            //Habia un +, es decir se pasaba del limite derecho cuando en realidad quiero que se quede en el limite, o sea la condicion de arriba
+        }}
 
     /**
      * {@summary Maneja los eventos de pulsación de teclas para controlar el movimiento del jugador.}

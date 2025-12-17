@@ -147,7 +147,7 @@ public class Alien extends Sprite {
                 this.y = Commons.BOARD_HEIGHT;
             }
 
-            var explImgPath = "/images/explosion.png";
+            var explImgPath = "/images/bomb.png";
             var imgUrl = getClass().getResource(explImgPath);
 
             if (imgUrl != null) {
