@@ -281,4 +281,85 @@ public class BoardIntegrationTest {
         logger.info("OK: La bomba se destruyó al alcanzar el límite del suelo.");
     }
 
+    //update_shots()
+    @Test
+    public void testUpdateShots_AlienMuere(){
+        logger.info("TEST: update_shots Caso Colisión: El disparo impacta y el alien debe morir");
+
+        //Configuramos el Mock del Shot
+        when(shotMock.isVisible()).thenReturn(true);
+        when(shotMock.getX()).thenReturn(100);
+        when(shotMock.getY()).thenReturn(100);
+
+        //Configuramos el Mock del Alien
+        when(alienMock.isVisible()).thenReturn(true);
+        when(alienMock.isDying()).thenReturn(false);
+        when(alienMock.getX()).thenReturn(100);
+        when(alienMock.getY()).thenReturn(100);
+
+        //Alien 2 lejos para que no interfiera
+        when(alienMock2.getX()).thenReturn(300);
+
+        logger.info("Ejecutando board.update_shots()");
+        board.update_shots();
+
+        verify(alienMock, times(1)).setDying(true);
+        verify(shotMock, times(1)).die();
+        assertEquals(1,board.getDeaths(), "El contador de muertes debe aumentar");
+
+        logger.info("OK: Se verificó que alienMock murió (setDying) y el shot se destruyó.");
+    }
+
+    @Test
+    public void testUpdateShots_DisparoAvanza(){
+        logger.info("TEST: update_shots Caso Sin Colisión: El disparo no toca al alien, por lo que debe avanzar.");
+
+        //Configuramos el Mock del Shot
+        when(shotMock.isVisible()).thenReturn(true);
+        when(shotMock.getX()).thenReturn(100);
+        when(shotMock.getY()).thenReturn(100);
+
+        //Configuramos el Mock del Alien (Debe estar lejos para que no choquen)
+        when(alienMock.isVisible()).thenReturn(true);
+        when(alienMock.getX()).thenReturn(200);
+        when(alienMock.getY()).thenReturn(200);
+
+        //Alien 2 lejos para que no interfiera
+        when(alienMock2.getX()).thenReturn(300);
+
+        logger.info("Ejecutando board.update_shots()");
+        board.update_shots();
+
+        verify(alienMock, never()).setDying(true);
+        verify(shotMock, never()).die();
+
+        //Verificamos la integración del movimiento
+        int y = 100 - Commons.SHOT_SPEED;
+        verify(shotMock).setY(y);
+
+        logger.info("OK: Se verificó que el Alien sigue vivo y el disparo avanzó a Y = "+y);
+    }
+
+    @Test
+    public void testUpdateShots_FueraDePantalla(){
+        logger.info("TEST: update_shots Caso Borde de Pantalla: El disparo sale por el borde superior de la pantalla.");
+
+        //Situamos el disparo casi saliendo (Y=0)
+        when(shotMock.isVisible()).thenReturn(true);
+        when(shotMock.getY()).thenReturn(0);
+        when(shotMock.getX()).thenReturn(0);
+
+        when(alienMock.isVisible()).thenReturn(true);
+        when(alienMock.getX()).thenReturn(100);
+
+        when(alienMock2.isVisible()).thenReturn(true);
+        when(alienMock2.getX()).thenReturn(300);
+
+        logger.info("Ejecutando board.update_shots()");
+        board.update_shots();
+
+        verify(shotMock, times(1)).die();
+
+        logger.info("OK: Se verificó que el disparo llamó a die() al salir del límite superior de la pantalla.");
+    }
 }
