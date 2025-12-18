@@ -218,11 +218,6 @@ public class Board extends JPanel {
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
 
-        //Se han añadido las siguientes líneas para escalar el contenido al redimensionar la ventana
-        double escalaX = (double) getWidth() / Commons.BOARD_WIDTH;
-        double escalaY = (double) getHeight() / Commons.BOARD_HEIGHT;
-
-        ((Graphics2D) g).scale(escalaX, escalaY);
         doDrawing(g);
     }
 

@@ -33,8 +33,7 @@ public class Main extends JFrame  {
         setSize(Commons.BOARD_WIDTH, Commons.BOARD_HEIGHT);
 
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        //se ha cambiado a true para permitir redimensionar la ventana
-        setResizable(true);
+        setResizable(false);
         setLocationRelativeTo(null);
     }
 
