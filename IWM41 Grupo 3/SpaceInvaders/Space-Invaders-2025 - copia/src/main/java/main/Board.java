@@ -293,17 +293,27 @@ public class Board extends JPanel {
      * y se establece el mensaje "<code>Game won!</code>".</dd></dl>
      */
     public void update() {
-        if (deaths == Commons.NUMBER_OF_ALIENS_TO_DESTROY) {
-            inGame = false;
-            timer.stop();
-            message = "Game won!";
+
+        if (this.deaths == Commons.NUMBER_OF_ALIENS_TO_DESTROY) {
+            this.inGame = false;
+            this.timer.stop();
+            this.message = "Game won!";
         }
 
-        // player
-        this.player.act();
-        update_shots();
-        update_aliens();
-        update_bomb();
+        //se ha añadido este bloque de código para que el timer se inicie de nuevo si se ha pausado
+        if (this.inGame) {
+            if (this.timer != null && !this.timer.isRunning()) {
+                this.timer.start();
+            }
+
+            if (this.player != null) {
+                this.player.act();
+            }
+
+            update_shots();
+            update_aliens();
+            update_bomb();
+        }
     }
 
     /**
