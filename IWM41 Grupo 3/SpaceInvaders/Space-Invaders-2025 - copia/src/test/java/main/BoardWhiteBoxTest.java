@@ -68,7 +68,7 @@ class BoardWhiteBoxTest {
     // --- Pruebas para update() [CC = 1] ---
 
     @Test
-    void testUpdate_Victoria() throws Exception {
+    void testUpdate_Victoria() {
         boolean resultado = false;
 
         board.setDeaths(Commons.NUMBER_OF_ALIENS_TO_DESTROY);
@@ -82,20 +82,22 @@ class BoardWhiteBoxTest {
     }
 
     @Test
-    void testUpdate_SigueElJuego() throws Exception {
-        boolean resultado = false;
+    void testUpdate_SigueElJuego() {
+        if (board.getPlayer() == null) {
+            board.setPlayer(new Player());
+        }
 
         board.setDeaths(0);
         board.setInGame(true);
         board.setMessage("Mensaje Inicial");
-
-        resultado = board.getTimer().isRunning();
-
+        board.getTimer().start();
         board.update();
 
-        resultado= (board.isInGame()) && (board.getMessage().equals("Mensaje Inicial")) && (board.getTimer().isRunning());
+        boolean resultado = (board.isInGame())
+                && (board.getMessage().equals("Mensaje Inicial"))
+                && (board.getTimer().isRunning());
 
-        assertTrue(resultado);
+        assertTrue(resultado, "El juego debe continuar, el mensaje no debe cambiar y el timer debe estar corriendo");
     }
 
         // --- Pruebas para update_aliens() [CC = 9] ---
