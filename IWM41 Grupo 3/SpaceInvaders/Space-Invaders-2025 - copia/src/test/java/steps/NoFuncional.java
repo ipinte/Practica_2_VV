@@ -29,9 +29,13 @@ public class NoFuncional {
 
     @After
     public void tearDown() {
-        gameWindow.setVisible(false);
-        gameWindow.dispose();
-        board.getTimer().stop();
+        if (board != null && board.getTimer() != null) {
+            board.getTimer().stop();
+        }
+        if (gameWindow != null) {
+            gameWindow.setVisible(false);
+            gameWindow.dispose();
+        }
         board = null;
         gameWindow = null;
     }
