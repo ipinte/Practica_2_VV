@@ -152,18 +152,37 @@ public class BoardIntegrationTest {
 
         verify(timerMock).stop();
 
-        assertFalse(board.isInGame(), "El juego debería marcarse como terminado");
         assertEquals("Game won!", board.getMessage());
+        assertFalse(board.isInGame());
     }
 
     @Test
     public void testUpdate_MMPath2_NormalLoop() {
-        logger.info("TEST: update() - Ciclo Normal de Juego");
+        logger.info("TEST: update() - Ciclo Normal");
 
         board.setDeaths(0);
+        board.setInGame(true);
+
+        lenient().when(timerMock.isRunning()).thenReturn(true);
+
         board.update();
 
-        verify(timerMock, never()).stop();
+        verify(playerMock, times(1)).act();
+        verify(timerMock, never()).start();
+    }
+
+    @Test
+    public void testUpdate_MMPath3_TimerRestart() {
+        logger.info("TEST: update() - Reinicio del Timer");
+
+        board.setInGame(true);
+        board.setDeaths(0);
+
+        when(timerMock.isRunning()).thenReturn(false);
+
+        board.update();
+
+        verify(timerMock).start();
         verify(playerMock).act();
     }
 
