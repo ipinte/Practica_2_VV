@@ -9,12 +9,16 @@ Feature: Requisitos No Funcionales del Sistema Space Invaders
     Then los componentes del juego deben reescalarse proporcionalmente
     And el area de juego debe ocupar todo el panel visible
 
-  Scenario: Verificación de recursos gráficos
+  Scenario: Verificación de recursos gráficos estáticos
     Given el tablero de juego ha sido inicializado
     When verifico la carga de las imagenes de los sprites
     Then la imagen del "Player" no debe ser nula
     And la imagen del "Alien" no debe ser nula
-    And la imagen del "Shot" no debe ser nula
+
+  Scenario: Verificación de gráfico de disparo (Dinámico)
+    Given el tablero de juego ha sido inicializado
+    When el jugador realiza un disparo de prueba
+    Then la imagen del "Shot" no debe ser nula
 
   Scenario: Cierre de la aplicación
     Given el juego se esta ejecutando
