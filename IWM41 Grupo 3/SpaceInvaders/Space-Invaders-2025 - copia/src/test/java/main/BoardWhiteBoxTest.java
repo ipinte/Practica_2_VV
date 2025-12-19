@@ -69,16 +69,16 @@ class BoardWhiteBoxTest {
 
     @Test
     void testUpdate_Victoria() {
-        boolean resultado = false;
-
         board.setDeaths(Commons.NUMBER_OF_ALIENS_TO_DESTROY);
         board.setInGame(true);
-        resultado = board.getTimer().isRunning();
-
+        board.getTimer().start();
         board.update();
-        resultado = (!board.isInGame()) && (board.getMessage().equals("Game won!")) && (!board.getTimer().isRunning());
 
-        assertTrue(resultado);
+        boolean resultado = (!board.isInGame())
+                && ("Game won!".equals(board.getMessage()))
+                && (!board.getTimer().isRunning());
+
+        assertTrue(resultado, "El juego debe terminar, mostrar mensaje de victoria y detener el timer");
     }
 
     @Test
